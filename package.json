@@ -1,0 +1,20 @@
+{
+  "name": "little-genius-prep",
+  "version": "1.0.0",
+  "description": "Demo Website and Academy Operations ERP for Little Genius Prep (Brooklyn, NY)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "shsat",
+    "tutoring",
+    "regents",
+    "brooklyn",
+    "erp",
+    "education"
+  ],
+  "author": "Little Genius Prep",
+  "license": "ISC"
+}

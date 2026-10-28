@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Student Portal | Little Genius Prep Academy (Brooklyn)</title>
+  <meta name="description" content="Dedicated mobile-first student portal for Little Genius Prep scholars. Track SHSAT mock test scores, view private teacher notes, and access course syllabi.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/student.css">
+</head>
+<body class="student-body">
+
+  <!-- =========================================================================
+       1. STUDENT LOGIN SCREEN (With 1-Click Demo Profiles)
+       ========================================================================= -->
+  <div id="student-login-view" class="login-wrapper">
+    <div class="login-card">
+      <div class="login-header">
+        <div class="login-crest">
+          <svg width="32" height="32" viewBox="0 0 40 40" fill="none">
+            <rect width="40" height="40" rx="10" fill="url(#crestGradLogin)" />
+            <path d="M12 28L20 12L28 28H23L20 21L17 28H12Z" fill="#FFFFFF"/>
+            <circle cx="20" cy="10" r="2.5" fill="#F59E0B" />
+            <defs>
+              <linearGradient id="crestGradLogin" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#1E3A8A"/>
+                <stop offset="1" stop-color="#2563EB"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <h1 class="portal-title">LITTLE GENIUS <span class="gold-text">STUDENT</span></h1>
+        <p class="portal-subtitle">Brighton Beach Academy • Student & Parent Portal</p>
+      </div>
+
+      <!-- Motivational Countdown Widget -->
+      <div class="countdown-card">
+        <div class="countdown-badge">Next Proctored Benchmark</div>
+        <div class="countdown-timer">
+          <span class="timer-days">3</span>
+          <span class="timer-label">Days Until Mock Exam #4 (Saturday 10:00 AM)</span>
+        </div>
+      </div>
+
+      <!-- Quick 1-Click Demo Profiles -->
+      <div class="demo-profiles-box">
+        <span class="demo-tag">Fast Demo Login (1-Click)</span>
+        <button type="button" class="btn-demo-profile" onclick="loginDemo('STU-102')">
+          <div class="demo-avatar">SL</div>
+          <div class="demo-info">
+            <strong>Sophia Lebedev (8th Grade)</strong>
+            <span>Target: Stuyvesant High School (560+)</span>
+          </div>
+          <span class="demo-arrow">→</span>
+        </button>
+
+        <button type="button" class="btn-demo-profile" onclick="loginDemo('STU-103')">
+          <div class="demo-avatar" style="background:linear-gradient(135deg, #D97706, #B45309);">BC</div>
+          <div class="demo-info">
+            <strong>Brandon Chen (8th Grade)</strong>
+            <span>Target: Brooklyn Technical HS (505+)</span>
+          </div>
+          <span class="demo-arrow">→</span>
+        </button>
+      </div>
+
+      <!-- Manual Access Form -->
+      <form id="student-login-form" class="login-form" onsubmit="handleManualLogin(event)">
+        <div class="form-group-student">
+          <label for="stu_id_input">Student ID or Parent Email</label>
+          <input type="text" id="stu_id_input" placeholder="e.g. STU-102" required>
+        </div>
+
+        <div class="form-group-student">
+          <label for="stu_pin_input">4-Digit Security Passcode</label>
+          <input type="password" id="stu_pin_input" placeholder="••••" maxlength="4" value="2026">
+        </div>
+
+        <button type="submit" class="btn btn-full btn-primary btn-portal-login">
+          <span>Enter Student Space</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </form>
+
+      <div class="login-footer">
+        <a href="../index.html" class="back-link">← Return to Public Website</a>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- =========================================================================
+       2. AUTHENTICATED STUDENT APP SHELL (Desktop & Mobile Modes)
+       ========================================================================= -->
+  <div id="student-app-view" class="app-wrapper" style="display:none;">
+
+    <!-- =========================================================================
+         DESKTOP SIDEBAR (Visible in Desktop Mode)
+         ========================================================================= -->
+    <aside class="desktop-sidebar">
+      <div class="desktop-sidebar-brand">
+        <div class="sidebar-crest">
+          <svg width="28" height="28" viewBox="0 0 40 40" fill="none">
+            <rect width="40" height="40" rx="10" fill="url(#crestGradSide)" />
+            <path d="M12 28L20 12L28 28H23L20 21L17 28H12Z" fill="#FFFFFF"/>
+            <circle cx="20" cy="10" r="2.5" fill="#F59E0B" />
+            <defs>
+              <linearGradient id="crestGradSide" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#1E3A8A"/>
+                <stop offset="1" stop-color="#2563EB"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="sidebar-brand-text">
+          <h2 class="sidebar-title">LITTLE GENIUS <span class="gold-text">STUDENT</span></h2>
+          <span class="sidebar-sub">Brighton Beach Academy</span>
+        </div>
+      </div>
+
+      <!-- Student Card in Sidebar -->
+      <div class="sidebar-student-card">
+        <div class="sidebar-avatar" id="desktop-avatar">SL</div>
+        <div class="sidebar-student-info">
+          <strong id="desktop-student-name">Sophia Lebedev</strong>
+          <span id="desktop-cohort-name">SHSAT Fall Intensive Alpha</span>
+          <span class="sidebar-target-badge" id="desktop-target">🎯 Stuyvesant (560+)</span>
+        </div>
+      </div>
+
+      <!-- Fast Demo Profile Switcher -->
+      <div class="sidebar-profile-switch">
+        <span class="switch-label">Switch Student Demo:</span>
+        <div class="profile-switch-pills">
+          <button type="button" class="switch-pill active" id="pill-STU-102" onclick="loginDemo('STU-102')">Sophia (SL)</button>
+          <button type="button" class="switch-pill" id="pill-STU-103" onclick="loginDemo('STU-103')">Brandon (BC)</button>
+        </div>
+      </div>
+
+      <!-- Desktop Sidebar Navigation -->
+      <nav class="desktop-nav-menu">
+        <button type="button" class="desktop-nav-link active" data-tab="home" onclick="switchTab('home')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+          <span>Overview Dashboard</span>
+        </button>
+
+        <button type="button" class="desktop-nav-link" data-tab="subjects" onclick="switchTab('subjects')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+          <span>My Subjects &amp; Homework</span>
+        </button>
+
+        <button type="button" class="desktop-nav-link" data-tab="exams" onclick="switchTab('exams')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+          <span>Mock Tests &amp; Scaled Scores</span>
+          <span class="desktop-nav-badge" id="desktop-badge-score">600 pts</span>
+        </button>
+
+        <button type="button" class="desktop-nav-link" data-tab="messages" onclick="switchTab('messages')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          <span>Academy Communications</span>
+          <span class="desktop-unread-dot"></span>
+        </button>
+
+        <button type="button" class="desktop-nav-link" data-tab="notes" onclick="switchTab('notes')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+          <span>Private Teacher Reviews</span>
+          <span class="desktop-lock">🔒</span>
+        </button>
+
+        <a href="../index.html#campus" target="_blank" class="desktop-nav-link">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          <span>Campus Guide &amp; Transit</span>
+        </a>
+      </nav>
+
+      <div class="desktop-sidebar-footer">
+        <a href="../index.html" class="btn-sidebar-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          <span>Public Website</span>
+        </a>
+        <button type="button" class="btn-sidebar-logout" onclick="logoutStudent()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+          <span>Sign Out</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- =========================================================================
+         MAIN APPLICATION PANE
+         ========================================================================= -->
+    <div class="app-main-pane">
+
+      <!-- Desktop Top Header Bar (With Mode Switcher!) -->
+      <header class="desktop-top-header">
+        <div class="desktop-header-left">
+          <h1 class="desktop-view-title" id="desktop-view-title">Overview Dashboard</h1>
+          <span class="desktop-cohort-badge" id="desktop-header-cohort">SHSAT Fall Intensive Alpha</span>
+        </div>
+
+        <div class="desktop-header-right">
+          <!-- Display Mode Segmented Control (Auto / Desktop / Mobile) -->
+          <div class="mode-switch-segmented" title="Display layout toggle">
+            <button type="button" class="mode-switch-btn active" id="btn-mode-auto" onclick="setPortalDisplayMode('auto')" title="Automatic responsive layout">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+              <span>Auto</span>
+            </button>
+            <button type="button" class="mode-switch-btn" id="btn-mode-desktop" onclick="setPortalDisplayMode('desktop')" title="Force desktop layout">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+              <span>Desktop</span>
+            </button>
+            <button type="button" class="mode-switch-btn" id="btn-mode-mobile" onclick="setPortalDisplayMode('mobile')" title="Simulate mobile view">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+              <span>Mobile</span>
+            </button>
+          </div>
+
+          <div class="desktop-score-pill" id="desktop-header-score">
+            <span>Score:</span>
+            <strong>600 / 700</strong>
+          </div>
+
+          <button type="button" class="btn-icon-notify" onclick="switchTab('messages')" title="Messages">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+            <span class="notify-dot"></span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Top Mobile App Header (Visible in Mobile Mode) -->
+      <header class="student-top-nav">
+        <div class="student-profile-mini">
+          <div class="profile-avatar-mini" id="header-avatar">SL</div>
+          <div class="profile-info-mini">
+            <strong id="header-student-name">Sophia Lebedev</strong>
+            <span id="header-cohort-name">SHSAT Fall Intensive Alpha</span>
+          </div>
+        </div>
+
+        <div class="header-right-actions">
+          <button type="button" class="btn-mode-quick-toggle" id="btn-mobile-reactive-indicator" onclick="cyclePortalMode()" title="Responsive mode (Click to toggle modes)">
+            ⚡ Auto
+          </button>
+          <button type="button" class="btn-icon-notify" onclick="switchTab('messages')" title="Messages">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+            <span class="notify-dot"></span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Main Scrollable Content Viewport -->
+      <main class="student-content-area" id="student-view-viewport">
+        <!-- Injected by student-app.js based on active tab -->
+      </main>
+
+    </div>
+
+    <!-- Floating Glassmorphic Burger Button -->
+    <button type="button" class="floating-burger-btn" id="floating-burger" aria-label="Open Navigation Menu">
+      <div class="burger-icon-lines">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </button>
+
+    <!-- Slide-In Drawer Menu -->
+    <div class="drawer-overlay" id="drawer-overlay">
+      <div class="drawer-panel" id="drawer-panel">
+        <div class="drawer-header">
+          <div class="drawer-avatar" id="drawer-avatar">SL</div>
+          <div class="drawer-user-info">
+            <h3 id="drawer-name">Sophia Lebedev</h3>
+            <span class="drawer-grade" id="drawer-grade">Grade 8 • Brighton 7th St</span>
+            <span class="drawer-target-pill" id="drawer-target">🎯 Stuyvesant High School</span>
+          </div>
+          <button type="button" class="drawer-close-btn" id="drawer-close">&times;</button>
+        </div>
+
+        <nav class="drawer-nav">
+          <button type="button" class="drawer-link active" onclick="switchTab('home')">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            <span>Overview Dashboard</span>
+          </button>
+
+          <button type="button" class="drawer-link" onclick="switchTab('subjects')">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+            <span>My Subjects & Homework</span>
+          </button>
+
+          <button type="button" class="drawer-link" onclick="switchTab('exams')">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+            <span>Mock Tests & Scaled Scores</span>
+            <span class="drawer-badge-gold">600 pts</span>
+          </button>
+
+          <button type="button" class="drawer-link" onclick="switchTab('messages')">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            <span>Academy Communications</span>
+            <span class="drawer-badge-dot"></span>
+          </button>
+
+          <button type="button" class="drawer-link" onclick="switchTab('notes')">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+            <span>Private Teacher Reviews</span>
+            <span class="drawer-lock-icon">🔒</span>
+          </button>
+
+          <a href="../index.html#campus" target="_blank" class="drawer-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            <span>Brighton Campus Guide & Transit</span>
+          </a>
+        </nav>
+
+        <div class="drawer-footer">
+          <button type="button" class="btn-logout" onclick="logoutStudent()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+            <span>Sign Out</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Thumb Navigation Bar -->
+    <nav class="bottom-thumb-nav">
+      <button type="button" class="thumb-nav-btn active" data-tab="home" onclick="switchTab('home')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+        <span>Overview</span>
+      </button>
+
+      <button type="button" class="thumb-nav-btn" data-tab="subjects" onclick="switchTab('subjects')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+        <span>Subjects</span>
+      </button>
+
+      <button type="button" class="thumb-nav-btn" data-tab="exams" onclick="switchTab('exams')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+        <span>Exams</span>
+      </button>
+
+      <button type="button" class="thumb-nav-btn" data-tab="messages" onclick="switchTab('messages')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        <span>Messages</span>
+      </button>
+
+      <button type="button" class="thumb-nav-btn" data-tab="notes" onclick="switchTab('notes')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+        <span>Notes</span>
+      </button>
+    </nav>
+
+  </div>
+
+  <!-- App-Native Dialog Container (Strictly No window.alert!) -->
+  <div id="student-modal-overlay" class="student-modal-overlay" aria-hidden="true">
+    <div class="student-modal-dialog" role="dialog" aria-modal="true">
+      <button type="button" class="student-modal-close" id="student-modal-close-btn" aria-label="Close">&times;</button>
+      <div id="student-modal-body"></div>
+    </div>
+  </div>
+
+  <script src="js/student-app.js"></script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Little Genius Prep | Academy Operations ERP & Mock Exam Suite</title>
+  <meta name="description" content="Academy operations management, SHSAT mock exam grading, student cohort tracking, and admissions pipeline for Little Genius Prep Brighton Beach.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/erp.css">
+</head>
+<body class="erp-body">
+
+  <!-- Top Navigation Bar -->
+  <header class="erp-topbar">
+    <div class="topbar-left">
+      <div class="erp-logo">
+        <div class="logo-crest">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="erp-title-group">
+          <span class="erp-brand">LITTLE GENIUS <span class="accent-gold">ERP</span></span>
+          <span class="erp-facility-label">Brighton Beach Academy • 3065 Brighton 7th St</span>
+        </div>
+      </div>
+      
+      <div class="term-badge">
+        <span class="dot-online"></span>
+        <span>Active Term: <strong>Fall 2026 Admissions & SHSAT Cycle</strong></span>
+      </div>
+    </div>
+
+    <div class="topbar-right">
+      <!-- Theme Switcher (Light / Dark Mode) -->
+      <button type="button" class="btn-theme-toggle" id="erp-theme-toggle" onclick="toggleERPTheme()" title="Basculer Thème Clair / Sombre">
+        <svg class="theme-icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        <svg class="theme-icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        <span id="theme-toggle-label">Mode Sombre</span>
+      </button>
+
+      <a href="../site/index.html" id="link-public-site" target="_blank" class="btn btn-sm btn-ghost" title="View Public Website">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        Public Website
+      </a>
+
+      <div class="user-profile">
+        <div class="avatar-circle">AL</div>
+        <div class="user-meta">
+          <span class="user-name">Arthur Letsker</span>
+          <span class="user-role">Founder &amp; Director</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Layout Container -->
+  <div class="erp-layout">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="erp-sidebar">
+      <nav class="sidebar-nav">
+        <button type="button" class="nav-item active" data-view="dashboard">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+          <span>Executive Overview</span>
+        </button>
+
+        <button type="button" class="nav-item" data-view="leads">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+          <span>Inquiries & CRM</span>
+          <span class="badge-count" id="inquiries-count-badge">0</span>
+        </button>
+
+        <button type="button" class="nav-item" data-view="cohorts">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          <span>Cohorts & Students</span>
+        </button>
+
+        <button type="button" class="nav-item" data-view="mock-exams">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          <span>Mock Exam Engine</span>
+          <span class="badge-accent">Flagship</span>
+        </button>
+
+        <button type="button" class="nav-item" data-view="attendance">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          <span>Attendance & Journal</span>
+        </button>
+
+        <button type="button" class="nav-item" data-view="tuition">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+          <span>Tuition & Billing</span>
+        </button>
+
+        <button type="button" class="nav-item" data-view="schedule">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          <span>Brighton Campus Rooms</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="system-status">
+          <span class="status-indicator"></span>
+          <span>System Healthy • Local Port 3081</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Dynamic Content Workspace -->
+    <main class="erp-main" id="erp-content-viewport">
+      <!-- Injected dynamically by erp.js -->
+    </main>
+  </div>
+
+  <!-- App-Native Global Modal Container (Strictly No Browser window.alert) -->
+  <div id="erp-modal-overlay" class="modal-overlay" aria-hidden="true">
+    <div class="modal-dialog glass-panel" role="dialog" aria-modal="true">
+      <button type="button" class="modal-close" id="erp-modal-close-btn" aria-label="Close dialog">&times;</button>
+      <div class="modal-body" id="erp-modal-body-content">
+        <!-- Content injected dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <script src="js/mock-data.js"></script>
+  <script src="js/erp.js"></script>
+</body>
+</html>
