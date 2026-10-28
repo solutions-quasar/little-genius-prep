@@ -1,0 +1,17 @@
+{
+  "name": "Little Genius Prep - NYC Specialized High School & Regents Academy",
+  "short_name": "LittleGenius",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0F172A",
+  "theme_color": "#1E3A8A",
+  "description": "NYS Certified Tutoring Academy in Brighton Beach, Brooklyn. Expert SHSAT, Regents, G&T and SAT prep.",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
